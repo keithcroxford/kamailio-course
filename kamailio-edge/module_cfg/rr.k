@@ -1,0 +1,5 @@
+# ----- rr params -----
+# set next param to 1 to add value to ;lr param (helps with some UAs)
+modparam("rr", "enable_full_lr", 0)
+# do not append from tag to the RR (no need for this script)
+modparam("rr", "append_fromtag", 0)

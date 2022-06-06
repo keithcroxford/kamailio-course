@@ -1,0 +1,4 @@
+# Manage incoming replies
+onreply_route[MANAGE_REPLY] {
+	xdbg("incoming reply\n");
+}
