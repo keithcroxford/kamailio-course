@@ -35,7 +35,7 @@ services:
     container_name: b2bua_internal_01 
     stdin_open: true
     image: andrius/pjsua:latest
-    command: pjsua --null-audio --no-tcp
+    command: pjsua --null-audio --no-tcp --auto-answer=404
     ports:
       - "5091:5060"
     networks:
@@ -47,7 +47,7 @@ services:
     container_name: b2bua_internal_02 
     stdin_open: true
     image: andrius/pjsua:latest
-    command: pjsua --null-audio --no-tcp
+    command: pjsua --null-audio --no-tcp --auto-answer=200
     ports:
       - "5092:5060"
     networks:
@@ -59,7 +59,7 @@ services:
     container_name: b2bua_external_01
     stdin_open: true
     image: andrius/pjsua:latest
-    command: pjsua --null-audio --no-tcp  --outbound sip:192.168.10.2;lr
+    command: pjsua --null-audio --no-tcp  --outbound sip:192.168.254.2;lr
     ports:
       - "5093:5060"
     networks:
