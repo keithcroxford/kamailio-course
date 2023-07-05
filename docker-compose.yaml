@@ -1,13 +1,14 @@
 ---
 version: "3.9"
 services:
+
   kamailio-edge:
     image: kamailio/kamailio:5.4.6-buster
     container_name: kamailio-edge
     ports:
       - "5090:5060"
     volumes:
-      - ./kamailio-edge/:/etc/kamailio
+      - ./kamailio-default/:/etc/kamailio
     environment:
       - KAM_SHM_MEM_SIZE=256
     networks:
@@ -15,20 +16,6 @@ services:
         ipv4_address: 192.168.254.2
       internal:
         ipv4_address: 172.16.254.2
-
-  rtpengine-edge:
-    image: drachtio/rtpengine
-    container_name: rtpengine-edge
-    ports:
-      - "23000-23100:23000-23100"
-    volumes:
-      - ./rtpengine-edge/:/etc
-    networks:
-      external:
-        ipv4_address: 192.168.254.3
-      internal:
-        ipv4_address: 172.16.254.3
-
 
   b2bua_internal_01:
     tty: true
