@@ -2,6 +2,18 @@
 version: "3.9"
 services:
 
+  sngrep:
+    build:
+      context: ./sngrep
+      dockerfile: Dockerfile
+    container_name: sngrep
+    privileged: true  
+    network_mode: host 
+    environment:
+      - TERM=xterm
+    cap_add:
+      - NET_ADMIN
+
   kamailio-edge:
     image: kamailio/kamailio:5.4.6-buster
     container_name: kamailio-edge
