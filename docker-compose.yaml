@@ -20,7 +20,7 @@ services:
     ports:
       - "5090:5060"
     volumes:
-      - ./kamailio-edge/:/etc/kamailio
+      - ./kamailio-default/:/etc/kamailio
     environment:
       - KAM_SHM_MEM_SIZE=256
     networks:
