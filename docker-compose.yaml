@@ -65,6 +65,17 @@ services:
       external:
         ipv4_address: 192.168.254.100
 
+  b2bua_external_02:
+    tty: true
+    container_name: b2bua_external_02
+    stdin_open: true
+    image: andrius/pjsua:latest
+    command: pjsua --null-audio --no-tcp --auto-answer=200
+    networks:
+      external:
+        ipv4_address: 192.168.254.101
+
+
 networks:
     external:
         # use the bridge driver, but enable IPv6
