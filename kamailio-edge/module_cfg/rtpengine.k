@@ -1,1 +1,0 @@
-modparam("rtpengine", "rtpengine_sock", "udp:172.16.254.3:2223")
