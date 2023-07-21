@@ -23,6 +23,10 @@ services:
       - ./kamailio-default/:/etc/kamailio
     environment:
       - KAM_SHM_MEM_SIZE=256
+      - COREIP=172.16.254.2
+      - TLSPORT=5061
+      - UDPPORT=5060
+      - PUBLICIP=192.168.254.2
     networks:
       external:
         ipv4_address: 192.168.254.2
