@@ -15,7 +15,7 @@ services:
       - NET_ADMIN
 
   kamailio-edge:
-    image: kamailio/kamailio:5.4.6-buster
+    image: kamailio/kamailio-ci:5.4-alpine.debug
     container_name: kamailio-edge
     ports:
       - "5090:5060"
