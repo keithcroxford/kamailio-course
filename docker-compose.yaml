@@ -24,6 +24,7 @@ services:
     environment:
       - KAM_SHM_MEM_SIZE=256
       - COREIP=172.16.254.2
+      - CORESUBNET=172.16.254.1/24
       - TLSPORT=5061
       - UDPPORT=5060
       - PUBLICIP=192.168.254.2
