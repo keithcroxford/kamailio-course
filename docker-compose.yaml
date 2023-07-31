@@ -28,6 +28,11 @@ services:
       - TLSPORT=5061
       - UDPPORT=5060
       - PUBLICIP=192.168.254.2
+      - DBUSERNAME=kamailio
+      - DBPASSWORD=kamailiorw
+      - DBHOST=172.16.254.10
+      - DBNAME=kamailio
+
     networks:
       external:
         ipv4_address: 192.168.254.2
@@ -83,6 +88,25 @@ services:
     networks:
       external:
         ipv4_address: 192.168.254.100
+
+  db:
+    image: mysql:5.7
+    restart: always
+    container_name: db01
+    environment:
+      MYSQL_DATABASE: 'kamailio'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'ro_password'
+      MYSQL_ROOT_PASSWORD: 'rw_password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./db:/var/lib/mysql
+    networks:
+      internal:
+        ipv4_address: 172.16.254.10
 
 networks:
     external:
