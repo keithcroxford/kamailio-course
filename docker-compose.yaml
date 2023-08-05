@@ -40,12 +40,14 @@ services:
         ipv4_address: 172.16.254.2
 
   rtpengine-edge:
-    image: drachtio/rtpengine
+    build:
+      context: ./rtpengine-edge/docker
+      dockerfile: Dockerfile
     container_name: rtpengine-edge
     ports:
       - "23000-23100:23000-23100"
     volumes:
-      - ./rtpengine-edge/:/etc
+      - ./rtpengine-edge/config:/etc/rtpengine
     networks:
       external:
         ipv4_address: 192.168.254.3
