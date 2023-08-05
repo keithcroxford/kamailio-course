@@ -29,5 +29,5 @@ COPY ./entrypoint.sh /entrypoint.sh
 
 #ENTRYPOINT ["/entrypoint.sh"]
 
-#CMD ["rtpengine", "--config-file", "/etc/rtpengine/rtpengine.conf"]
-CMD ["tail", "-f", "/dev/stdout"]
+CMD ["rtpengine", "--config-file", "/etc/rtpengine/rtpengine.conf"]
+#CMD ["tail", "-f", "/dev/stdout"]
