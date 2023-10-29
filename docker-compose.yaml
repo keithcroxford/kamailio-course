@@ -83,8 +83,11 @@ services:
     tty: true
     container_name: b2bua_external_01
     stdin_open: true
+    volumes:
+      - ./b2bua/b2bua_external_01/:/config
     image: andrius/pjsua:latest
-    command: pjsua --null-audio --no-tcp  --outbound sip:192.168.254.2;lr
+    command: pjsua --config-file=/config/pjsua.cfg
+    #command: "tail -f /dev/null"
     ports:
       - "5093:5060"
     networks:
