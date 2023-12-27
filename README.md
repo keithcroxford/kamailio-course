@@ -8,7 +8,8 @@ This repo will eventually be connected to a Udemy Course. Check back for more de
   course/03-general-reqs = Building out the General Requirements 
   course/04-rtpengine = Setting up RTPEngine to allow Media
   course/05-cdrs =  Call Detail Record Configuration
-* course/06-tls = Setting up TLS 
+  course/06-tls = Setting up TLS 
+  course/07-topo = Setting up the topology hiding functionality
 
 
 # Business Requirements
