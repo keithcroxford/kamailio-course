@@ -32,6 +32,11 @@ services:
       - DBPASSWORD=kamailiorw
       - DBHOST=172.16.254.10
       - DBNAME=kamailio
+    depends_on:
+      rtpengine-edge:
+        condition: service_started
+      db:
+        condition: service_started
 
     networks:
       external:
