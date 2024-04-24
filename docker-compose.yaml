@@ -64,13 +64,18 @@ services:
     tty: true
     container_name: b2bua_internal_01 
     stdin_open: true
+    volumes:
+      - ./b2bua/b2bua_internal_01/:/config
+    command: pjsua --config-file=/config/pjsua.cfg
     image: andrius/pjsua:latest
-    command: pjsua --null-audio --no-tcp --auto-answer=404 --outbound sip:172.16.254.2;lr
     ports:
       - "5091:5060"
     networks:
       internal:
         ipv4_address: 172.16.254.100
+    depends_on:
+      kamailio-edge:
+        condition: service_started
 
   b2bua_internal_02:
     tty: true
@@ -83,6 +88,9 @@ services:
     networks:
       internal:
         ipv4_address: 172.16.254.101
+    depends_on:
+      kamailio-edge:
+        condition: service_started
 
   b2bua_external_01:
     tty: true
@@ -98,6 +106,9 @@ services:
     networks:
       external:
         ipv4_address: 192.168.254.100
+    depends_on:
+      kamailio-edge:
+        condition: service_started
 
   db:
     image: mysql:5.7
