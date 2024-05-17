@@ -1,7 +1,7 @@
 # vim:set ft=dockerfile:
 FROM alpine:edge
 
-RUN apk --update add sngrep ngrep bash \
+RUN apk --update add sngrep ngrep bash bind-tools \
 &&  rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
 ENV LC_ALL=C.UTF-8 \

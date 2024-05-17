@@ -37,6 +37,7 @@ services:
         condition: service_started
       db:
         condition: service_started
+ 
 
     networks:
       external:
@@ -128,6 +129,21 @@ services:
     networks:
       internal:
         ipv4_address: 172.16.254.10
+
+  bind:
+    image: internetsystemsconsortium/bind9:9.16
+    container_name: bind
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - ./bind/named.conf:/etc/bind/named.conf
+      - ./bind//named.conf.local:/etc/bind/named.conf.local
+      - ./bind/db.e164.arpa:/etc/bind/db.e164.arpa
+    restart: always
+    networks:
+      internal:
+        ipv4_address: 172.16.254.20
 
 networks:
     external:

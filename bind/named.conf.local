@@ -1,0 +1,6 @@
+# This file contains the zone configuration. We are going to run a single zone
+
+zone "e164.arpa" {
+    type master;
+    file "/etc/bind/db.e164.arpa";
+};
