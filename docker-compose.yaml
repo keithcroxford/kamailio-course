@@ -20,7 +20,8 @@ services:
     ports:
       - "5090:5060"
     volumes:
-      - ./kamailio-default/:/etc/kamailio
+      - ./kamailio-default/etc/kamailio/:/etc/kamailio
+      - ./kamailio-default/etc/resolv.conf:/etc/resolv.conf
     environment:
       - KAM_SHM_MEM_SIZE=256
       - COREIP=172.16.254.2
@@ -37,8 +38,8 @@ services:
         condition: service_started
       db:
         condition: service_started
- 
-
+    dns:
+      - 172.16.254.20
     networks:
       external:
         ipv4_address: 192.168.254.2
@@ -107,6 +108,24 @@ services:
     networks:
       external:
         ipv4_address: 192.168.254.100
+    depends_on:
+      kamailio-edge:
+        condition: service_started
+
+  b2bua_external_02:
+    tty: true
+    container_name: b2bua_external_02
+    stdin_open: true
+    volumes:
+      - ./b2bua/b2bua_external_02/:/config
+    image: andrius/pjsua:latest
+    command: pjsua --config-file=/config/pjsua.cfg
+    #command: "tail -f /dev/null"
+    ports:
+      - "5094:5060"
+    networks:
+      external:
+        ipv4_address: 192.168.254.101
     depends_on:
       kamailio-edge:
         condition: service_started
