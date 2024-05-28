@@ -1,15 +1,21 @@
 # kamailio-course
 
-This repo will eventually be connected to a Udemy Course. Check back for more details in the future. 
+This repo is linked to the Udemy Course "Learn SIP Through Kamailio"[https://www.udemy.com/course/learn-sip-through-kamailio/\?referralCode\=1091DEB811F7C7329839].  
 
-# Branch Definition
-  course/01-basic-config = Setting up the inital structure
-  course/02-first-refactor = Performing a refactor to start to separate concerns.
-  course/03-general-reqs = Building out the General Requirements 
-  course/04-rtpengine = Setting up RTPEngine to allow Media
-  course/05-cdrs =  Call Detail Record Configuration
-  course/06-tls = Setting up TLS 
-  course/07-topo = Setting up the topology hiding functionality
+# Branch Definitions
+  - course/01-basic-config = Setting up the inital structure
+  - course/02-first-refactor = Performing a refactor to start to separate concerns.
+  - course/03-general-reqs = Building out the General Requirements 
+  - course/04-rtpengine = Setting up RTPEngine to allow Media
+  - course/05-cdrs =  Call Detail Record Configuration
+  - course/06-tls = Setting up TLS 
+  - course/07-topo = Setting up the topology hiding functionality
+  - course/08-registrar = Building a basic SIP Registrar
+  - course/09-removing-codecs = Removing codecs from the SDP as a 
+  - course/10-secfilter = Demonstrates how traffic can be blocked with Secfilter, Pike and Htable
+  - course/11-dispatcher = Load balancing inbound traffic to multiple core B2BUAs
+  - course/12-srtp = Shows to to convert RTP -> SRTP and vice versa 
+  - course/13-enum = Demonstrates how outbound calls can be routed with ENUM 
 
 
 # Business Requirements
