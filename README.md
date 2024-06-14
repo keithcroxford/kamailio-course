@@ -2,6 +2,17 @@
 
 This repo is linked to the Udemy Course "Learn SIP Through Kamailio"[https://www.udemy.com/course/learn-sip-through-kamailio/\?referralCode\=1091DEB811F7C7329839].  
 
+# Important 
+If you choose to work only from the main branch, and not start with course/01-basic-config, then you will need to run the initial_setup.sh script. This script MUST be called from the directory that it resides in. 
+
+```
+git clone https://github.com/keithcroxford/kamailio-course.git
+cd kamailio-course
+chmod +x initial_setup.sh
+./init_setup.sh
+
+```
+
 # Branch Definitions
   - course/01-basic-config = Setting up the inital structure
   - course/02-first-refactor = Performing a refactor to start to separate concerns.
