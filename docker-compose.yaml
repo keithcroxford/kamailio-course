@@ -79,6 +79,22 @@ services:
       kamailio-edge:
         condition: service_started
 
+  asterisk_internal_01:
+    tty: true
+    container_name: asterisk_internal_01
+    stdin_open: true
+    volumes:
+      - ./b2bua/asterisk_internal_01/:/etc/asterisk
+    image: andrius/asterisk:latest
+    ports:
+      - "5095:5080"
+    networks:
+      internal:
+        ipv4_address: 172.16.254.110
+    depends_on:
+      kamailio-edge:
+        condition: service_started
+
   b2bua_internal_02:
     tty: true
     container_name: b2bua_internal_02 
