@@ -164,6 +164,20 @@ services:
       internal:
         ipv4_address: 172.16.254.20
 
+  api:
+    container_name: api
+    build:
+      context: ./api/
+      dockerfile: docker/Dockerfile
+    environment:
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_RUN_PORT=5000
+    ports:
+      - "5000:5000"
+    networks:
+      internal:
+        ipv4_address: 172.16.254.30
+
 networks:
     external:
         # use the bridge driver, but enable IPv6
