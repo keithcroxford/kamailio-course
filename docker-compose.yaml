@@ -157,12 +157,28 @@ services:
       - "53:53/tcp"
     volumes:
       - ./bind/named.conf:/etc/bind/named.conf
-      - ./bind//named.conf.local:/etc/bind/named.conf.local
+      - ./bind/named.conf.local:/etc/bind/named.conf.local
       - ./bind/db.e164.arpa:/etc/bind/db.e164.arpa
     restart: always
     networks:
       internal:
         ipv4_address: 172.16.254.20
+
+  api:
+    container_name: api
+    build:
+      context: ./api/
+      dockerfile: docker/Dockerfile
+    environment:
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_RUN_PORT=5000
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api/app:/app
+    networks:
+      internal:
+        ipv4_address: 172.16.254.30
 
 networks:
     external:
