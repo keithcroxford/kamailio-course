@@ -16,7 +16,7 @@ ROUTE1 =  {
             "display": "Bob",
             "uri": "sip:bob@b.example.org"
         },
-        "extra": "X-Hdr-A: abc\r\nX-Hdr-B: bcd\r\n"
+        "extra": "X-Hdr-A: abc\r\n"
     },
     "branch_flags": 8,
     "fr_timer": 5000,
@@ -37,7 +37,7 @@ ROUTE2 =  {
             "display": "Bob",
             "uri": "sip:bob@b.example.org"
         },
-        "extra": "X-Hdr-A: abc\r\nX-Hdr-B: bcd\r\n"
+        "extra": "X-Hdr-A: abc\r\n"
     },
     "branch_flags": 8,
     "fr_timer": 5000,
@@ -52,36 +52,25 @@ ROUTES = [
 @app.route('/api/routing', methods=['POST'])
 def rtjson():
     """
-    Extremely simplified API that expects a POST request containing the "from_user" param. 
+    Extremely simplified API that expects a POST request containing the "to_user" param. 
     Depending on the value, a different list of routes will be provided in the response
     """
     data = request.json  #
 
-    if data['from_user'] == "b2bua_external":
+    if data['to_user'] == "b2bua_internal_01":
         response_data = {
             "rtjson" : {
-                "from_user": data['from_user'],
+                "to_user": data['to_user'],
                 "version": "1.0",
                 "routing" : "serial",
                 "routes" : [ROUTE1], 
             }
         }
         return jsonify(response_data)
-    
-    if data['from_user'] == "b2bua_internal":
-        response_data = {
-            "rtjson" : {
-                "from_user": data['from_user'],
-                "version": "1.0",
-                "routing" : "serial",
-                "routes" : [ROUTE2], 
-            }
-        }
-        return jsonify(response_data)
     else:
         response_data = {
             "rtjson" : {
-                "from_user": data['from_user'],
+                "to_user": data['to_user'],
                 "version": "1.0",
                 "routing" : "serial",
                 "routes" : [], 
