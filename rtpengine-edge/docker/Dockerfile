@@ -5,7 +5,8 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends ca-certificates gcc g++ make build-essential git libxtables-dev libavfilter-dev \
   libevent-dev libpcap-dev libxmlrpc-core-c3-dev markdown bash\
   libjson-glib-dev default-libmysqlclient-dev libhiredis-dev libssl-dev  libiptc-dev pandoc\
-  libcurl4-openssl-dev libavcodec-extra gperf libspandsp-dev libwebsockets-dev libpcre3-dev libopus-dev libmosquitto-dev libwebsockets-dev libbcg729-dev\
+  libcurl4-openssl-dev libavcodec-extra gperf libspandsp-dev libwebsockets-dev libpcre3-dev libopus-dev libmosquitto-dev libwebsockets-dev libbcg729-dev \
+  libmnl-dev libnftnl-dev libncurses5-dev libncursesw5-dev\
   && cd /usr/local/src \
   && git clone https://github.com/sipwise/rtpengine.git \
   && cd rtpengine/daemon \
@@ -27,7 +28,4 @@ EXPOSE 23000-32768/udp 22222/udp
 
 COPY ./entrypoint.sh /entrypoint.sh
 
-#ENTRYPOINT ["/entrypoint.sh"]
-
 CMD ["rtpengine", "--config-file", "/etc/rtpengine/rtpengine.conf"]
-#CMD ["tail", "-f", "/dev/stdout"]
