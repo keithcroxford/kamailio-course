@@ -28,7 +28,4 @@ EXPOSE 23000-32768/udp 22222/udp
 
 COPY ./entrypoint.sh /entrypoint.sh
 
-#ENTRYPOINT ["/entrypoint.sh"]
-
 CMD ["rtpengine", "--config-file", "/etc/rtpengine/rtpengine.conf"]
-#CMD ["tail", "-f", "/dev/stdout"]
