@@ -3,7 +3,7 @@ FROM debian:trixie-20230725
 RUN apt-get update \
   && apt-get -y --quiet --force-yes upgrade curl iproute2 \
   && apt-get install -y --no-install-recommends ca-certificates gcc g++ make build-essential git libxtables-dev libavfilter-dev \
-  libevent-dev libpcap-dev libxmlrpc-core-c3-dev markdown bash\
+  libevent-dev libpcap-dev libxmlrpc-core-c3-dev python3-markdown bash\
   libjson-glib-dev default-libmysqlclient-dev libhiredis-dev libssl-dev  libiptc-dev pandoc\
   libcurl4-openssl-dev libavcodec-extra gperf libspandsp-dev libwebsockets-dev libpcre3-dev libopus-dev libmosquitto-dev libwebsockets-dev libbcg729-dev \
   libmnl-dev libnftnl-dev libncurses5-dev libncursesw5-dev\
