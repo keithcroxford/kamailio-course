@@ -150,7 +150,7 @@ services:
         ipv4_address: 172.16.254.10
 
   bind:
-    image: internetsystemsconsortium/bind9:9.16
+    image: internetsystemsconsortium/bind9:9.18
     container_name: bind
     ports:
       - "53:53/udp"
