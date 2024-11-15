@@ -1,5 +1,4 @@
 ---
-version: "3.9"
 services:
 
   sngrep:
@@ -37,7 +36,7 @@ services:
       rtpengine-edge:
         condition: service_started
       db:
-        condition: service_started
+        condition: service_healthy
     dns:
       - 172.16.254.20
     networks:
@@ -134,6 +133,12 @@ services:
     image: mysql:5.7
     restart: always
     container_name: db01
+    healthcheck:
+      test: "/usr/bin/bash -c 'if [ ! -S /var/run/mysqld/mysqld.sock ]; then exit 1; fi'"
+      interval: 5s
+      timeout: 10s
+      retries: 15
+      start_period: 5s
     environment:
       MYSQL_DATABASE: 'kamailio'
       MYSQL_USER: 'user'
@@ -150,7 +155,7 @@ services:
         ipv4_address: 172.16.254.10
 
   bind:
-    image: internetsystemsconsortium/bind9:9.16
+    image: internetsystemsconsortium/bind9:9.18
     container_name: bind
     ports:
       - "53:53/udp"
