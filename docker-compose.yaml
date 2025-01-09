@@ -20,7 +20,8 @@ services:
     ports:
       - "5090:5060"
     volumes:
-      - ./kamailio-default/:/etc/kamailio
+      - ./kamailio-default/etc/kamailio/:/etc/kamailio
+      - ./kamailio-default/etc/resolv.conf:/etc/resolv.conf
     environment:
       - KAM_SHM_MEM_SIZE=256
       - COREIP=172.16.254.2
@@ -32,7 +33,13 @@ services:
       - DBPASSWORD=kamailiorw
       - DBHOST=172.16.254.10
       - DBNAME=kamailio
-
+    depends_on:
+      rtpengine-edge:
+        condition: service_started
+      db:
+        condition: service_started
+    dns:
+      - 172.16.254.20
     networks:
       external:
         ipv4_address: 192.168.254.2
@@ -59,13 +66,18 @@ services:
     tty: true
     container_name: b2bua_internal_01 
     stdin_open: true
+    volumes:
+      - ./b2bua/b2bua_internal_01/:/config
+    command: pjsua --config-file=/config/pjsua.cfg
     image: andrius/pjsua:latest
-    command: pjsua --null-audio --no-tcp --auto-answer=404 --outbound sip:172.16.254.2;lr
     ports:
       - "5091:5060"
     networks:
       internal:
         ipv4_address: 172.16.254.100
+    depends_on:
+      kamailio-edge:
+        condition: service_started
 
   b2bua_internal_02:
     tty: true
@@ -78,18 +90,45 @@ services:
     networks:
       internal:
         ipv4_address: 172.16.254.101
+    depends_on:
+      kamailio-edge:
+        condition: service_started
 
   b2bua_external_01:
     tty: true
     container_name: b2bua_external_01
     stdin_open: true
+    volumes:
+      - ./b2bua/b2bua_external_01/:/config
     image: andrius/pjsua:latest
-    command: pjsua --null-audio --no-tcp  --outbound sip:192.168.254.2;lr
+    command: pjsua --config-file=/config/pjsua.cfg
+    #command: "tail -f /dev/null"
     ports:
       - "5093:5060"
     networks:
       external:
         ipv4_address: 192.168.254.100
+    depends_on:
+      kamailio-edge:
+        condition: service_started
+
+  b2bua_external_02:
+    tty: true
+    container_name: b2bua_external_02
+    stdin_open: true
+    volumes:
+      - ./b2bua/b2bua_external_02/:/config
+    image: andrius/pjsua:latest
+    command: pjsua --config-file=/config/pjsua.cfg
+    #command: "tail -f /dev/null"
+    ports:
+      - "5094:5060"
+    networks:
+      external:
+        ipv4_address: 192.168.254.101
+    depends_on:
+      kamailio-edge:
+        condition: service_started
 
   db:
     image: mysql:5.7
@@ -109,6 +148,37 @@ services:
     networks:
       internal:
         ipv4_address: 172.16.254.10
+
+  bind:
+    image: internetsystemsconsortium/bind9:9.20
+    container_name: bind
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - ./bind/named.conf:/etc/bind/named.conf
+      - ./bind/named.conf.local:/etc/bind/named.conf.local
+      - ./bind/db.e164.arpa:/etc/bind/db.e164.arpa
+    restart: always
+    networks:
+      internal:
+        ipv4_address: 172.16.254.20
+
+  api:
+    container_name: api
+    build:
+      context: ./api/
+      dockerfile: docker/Dockerfile
+    environment:
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_RUN_PORT=5000
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api/app:/app
+    networks:
+      internal:
+        ipv4_address: 172.16.254.30
 
 networks:
     external:
